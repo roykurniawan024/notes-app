@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes App — Ruang Kerja Catatan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/styles/style.css" />
+</head>
+<body>
+  <app-bar
+    brand-title="Notes"
+    subtitle="Ruang Kerja Catatan"
+    badge-text=""
+  ></app-bar>
+
+  <main class="main-container">
+    <div class="workspace-grid">
+      <note-input
+        form-title="Buat Catatan Baru"
+        max-title-length="50"
+        min-body-length="10"
+      ></note-input>
+
+      <section class="notes-section" aria-label="Daftar catatan">
+        <div class="notes-header-card">
+          <note-stats
+            total-count="0"
+            active-count="0"
+            archived-count="0"
+            current-filter="all"
+          ></note-stats>
+
+          <div class="toolbar-controls">
+            <div class="view-toggle" role="group" aria-label="Mode tampilan">
+              <button type="button" class="view-toggle__btn active" id="viewGridBtn" title="Tampilan Grid">Grid</button>
+              <button type="button" class="view-toggle__btn" id="viewListBtn" title="Tampilan List">List</button>
+            </div>
+
+            <div class="sort-control">
+              <label for="sortSelect">Urutkan:</label>
+              <select id="sortSelect">
+                <option value="newest">Terbaru</option>
+                <option value="oldest">Terlama</option>
+                <option value="title">Judul (A-Z)</option>
+              </select>
+            </div>
+
+            <button type="button" class="btn-refresh" id="refreshApiBtn" title="Muat ulang catatan" aria-label="Muat ulang catatan">
+              <svg class="icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="notes-grid" id="notesGrid"></div>
+
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state__icon" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <h3>Belum ada catatan</h3>
+          <p>Silakan tambahkan catatan baru melalui formulir di samping, atau muat contoh catatan awal.</p>
+          <button type="button" class="btn-seed" id="seedNotesBtn">
+            <span>Muat Contoh Catatan</span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteModalHeading">
+    <div class="modal-card">
+      <h3 id="deleteModalHeading">Hapus Catatan</h3>
+      <p>Apakah Anda yakin ingin menghapus catatan <strong id="deleteModalNoteTitle"></strong>? Tindakan ini tidak dapat dibatalkan.</p>
+      <div class="modal-card__actions">
+        <button type="button" class="btn-modal" id="cancelDeleteBtn">Batal</button>
+        <button type="button" class="btn-modal btn-modal--danger" id="confirmDeleteBtn">Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+    <div class="modal-card modal-card--detail">
+      <h3 id="detailModalTitle">Detail Catatan</h3>
+      <div class="modal-card__meta" id="detailModalMeta"></div>
+      <div class="modal-card__body-text" id="detailModalBody"></div>
+      <div class="modal-card__actions">
+        <button type="button" class="btn-modal" id="closeDetailBtn">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <loading-indicator message="Memuat data catatan..." visible="false"></loading-indicator>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <app-footer
+    course-name="Belajar Fundamental Front-End Web Development"
+    year="2026"
+  ></app-footer>
+
+  <script type="module" src="src/scripts/app.js"></script>
+</body>
+</html>

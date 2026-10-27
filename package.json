@@ -1,0 +1,32 @@
+{
+  "name": "notes-app",
+  "version": "2.0.0",
+  "description": "Submission: Integrasi Notes App dengan RESTful API - Belajar Fundamental Front-End Web Development Dicoding",
+  "main": "src/index.js",
+  "scripts": {
+    "start-dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "dicoding",
+    "notes-app",
+    "restful-api",
+    "web-components",
+    "webpack",
+    "css-grid",
+    "prettier"
+  ],
+  "author": "Submission Student",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.10.0",
+    "html-webpack-plugin": "^5.6.0",
+    "prettier": "^3.2.5",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.2",
+    "webpack-merge": "^5.10.0"
+  }
+}
